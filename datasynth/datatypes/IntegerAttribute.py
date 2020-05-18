@@ -2,8 +2,8 @@ from typing import Union
 
 from pandas import Series
 
-from datatypes.AbstractAttribute import AbstractAttribute
-from datatypes.utils.DataType import DataType
+from .AbstractAttribute import AbstractAttribute
+from .utils.DataType import DataType
 
 
 class IntegerAttribute(AbstractAttribute):

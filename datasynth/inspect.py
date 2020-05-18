@@ -6,7 +6,7 @@ import seaborn as sns
 from numpy import arange
 from pandas import DataFrame
 
-from lib.utils import pairwise_attributes_mutual_information, normalize_given_distribution
+from .lib.utils import pairwise_attributes_mutual_information, normalize_given_distribution
 
 matplotlib.rc('xtick', labelsize=20)
 matplotlib.rc('ytick', labelsize=20)
@@ -108,15 +108,3 @@ class ModelInspector(object):
         fig.autofmt_xdate()
         fig.tight_layout()
         plt.subplots_adjust(top=0.83)
-
-
-if __name__ == '__main__':
-    # Directories of input and output files
-    input_dataset_file = '../datasets/AdultIncomeData/adult.csv'
-    dataset_description_file = '../output/description/AdultIncomeData_description.txt'
-    synthetic_dataset_file = '../output/synthetic_data/AdultIncomeData_synthetic.csv'
-
-    from pandas import read_csv
-
-    df = read_csv(input_dataset_file)
-    print(df.head(5))

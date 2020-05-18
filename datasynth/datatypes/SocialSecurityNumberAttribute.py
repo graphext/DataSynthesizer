@@ -3,8 +3,8 @@ from typing import Union
 import numpy as np
 from pandas import Series
 
-from datatypes.AbstractAttribute import AbstractAttribute
-from datatypes.utils.DataType import DataType
+from .AbstractAttribute import AbstractAttribute
+from .utils.DataType import DataType
 
 
 def pre_process(column: Series):

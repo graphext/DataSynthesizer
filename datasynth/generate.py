@@ -1,8 +1,11 @@
+from os import PathLike
+from pathlib import Path
+
 from numpy import random
 from pandas import DataFrame
 
-from datatypes.utils.AttributeLoader import parse_json
-from lib.utils import set_random_seed, read_json_file, generate_random_string
+from .datatypes.utils.AttributeLoader import parse_json
+from .lib.utils import set_random_seed, read_json_file, generate_random_string
 
 
 class DataGenerator(object):
@@ -56,7 +59,12 @@ class DataGenerator(object):
     def generate_dataset_in_correlated_attribute_mode(self, n, description_file, seed=0):
         set_random_seed(seed)
         self.n = n
-        self.description = read_json_file(description_file)
+        if isinstance(description_file, (str, PathLike)):
+            self.description = read_json_file(description_file)
+        elif isinstance(description_file, dict):
+            self.description = description_file
+        else:
+            raise ValueError(f"Description must be a dict or path to a file. Got {type(description_file)}.")
 
         all_attributes = self.description['meta']['all_attributes']
         candidate_keys = set(self.description['meta']['candidate_keys'])
@@ -74,6 +82,8 @@ class DataGenerator(object):
                 # for attributes not in BN or candidate keys, use independent attribute mode.
                 binning_indices = column.sample_binning_indices_in_independent_attribute_mode(n)
                 self.synthetic_dataset[attr] = column.sample_values_from_binning_indices(binning_indices)
+
+        return self.synthetic_dataset
 
     @staticmethod
     def get_sampling_order(bn):
@@ -115,15 +125,3 @@ class DataGenerator(object):
 
     def save_synthetic_data(self, to_file):
         self.synthetic_dataset.to_csv(to_file, index=False)
-
-
-if __name__ == '__main__':
-    from time import time
-
-    dataset_description_file = '../out/AdultIncome/description_test.txt'
-    generator = DataGenerator()
-
-    t = time()
-    generator.generate_dataset_in_correlated_attribute_mode(51, dataset_description_file)
-    print('running time: {} s'.format(time() - t))
-    print(generator.synthetic_dataset.loc[:50])

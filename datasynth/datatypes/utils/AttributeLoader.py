@@ -1,11 +1,11 @@
 from pandas import Series
 
-from datatypes.DateTimeAttribute import DateTimeAttribute
-from datatypes.FloatAttribute import FloatAttribute
-from datatypes.IntegerAttribute import IntegerAttribute
-from datatypes.SocialSecurityNumberAttribute import SocialSecurityNumberAttribute
-from datatypes.StringAttribute import StringAttribute
-from datatypes.utils.DataType import DataType
+from ..DateTimeAttribute import DateTimeAttribute
+from ..FloatAttribute import FloatAttribute
+from ..IntegerAttribute import IntegerAttribute
+from ..SocialSecurityNumberAttribute import SocialSecurityNumberAttribute
+from ..StringAttribute import StringAttribute
+from ..utils.DataType import DataType
 
 
 def parse_json(attribute_in_json):

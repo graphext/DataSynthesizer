@@ -10,3 +10,4 @@ webUI/media/*.csv
 **/db\.sqlite3
 
 **/\.DS_Store
+.mypy_cache

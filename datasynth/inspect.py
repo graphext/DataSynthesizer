@@ -85,6 +85,7 @@ class ModelInspector(object):
             ax2.set_xlim([x_min, x_max])
             ax2.set_ylim([y_min, y_max])
             fig.autofmt_xdate()
+            return fig
 
     def mutual_information_heatmap(self, attributes: List = None):
         if attributes:
@@ -108,3 +109,4 @@ class ModelInspector(object):
         fig.autofmt_xdate()
         fig.tight_layout()
         plt.subplots_adjust(top=0.83)
+        return fig
